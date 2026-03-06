@@ -10,31 +10,49 @@ import "@/styles/global.css"; // Adjust this to your global CSS path configured 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Opentsi Initiative</title>
   </head>
-  <body class="min-h-screen bg-white font-sans antialiased flex items-center">
+  <body
+    class="min-h-screen bg-white font-sans antialiased flex items-center justify-center"
+  >
     <main class="container mx-auto px-6 py-24 md:py-32 lg:px-12 max-w-7xl">
-      {
-        /* We constrain the width of the text to roughly half the screen to match the design */
-      }
-      <div class="max-w-2xl flex flex-col items-start gap-6">
+      <div class="max-w-2xl flex flex-col items-center gap-6 mx-auto">
         <h1
           class="text-[3.5rem] sm:text-6xl font-bold tracking-tight text-black leading-[1.05]"
         >
-          Connect With More Than 2'300 R and Data Enthusiasts!
+          Welcome to the Opentimeseries Initiative!
         </h1>
 
-        <p class="text-xl text-gray-600 leading-relaxed mt-2 pr-4">
-          Founded in 2014, the Zurich R User group is one of the largest R user
-          groups in Europe. Join our meetup events and become part of a lively
-          analytics community. Thanks to our speakers, hosts, and sponsors, our
-          events are completely free.
+        <p class="text-xl text-gray-600 leading-relaxed mt-2">
+          Although <b
+            >progress has been made in making time series data publicly
+            available</b
+          > the systematic evaluation of forecasts and economic research still requires
+          significant overhead costs, data preparation and maintenance. For this reason,
+          time series data is not often publicly available. At the SST, we created
+          the Open Time Series Initiative (Opentsi) to provide an <b
+            >open-source solutionfor time series vintage management</b
+          >, publication and maintenance. Opentsi uses popular open-source
+          platforms and is free. In this talk, we will introduce the initiative
+          and its workflows.
         </p>
+        <p class="text-xl text-gray-600 leading-relaxed mt-2">
+          Visit our R Packages on Github:
+        </p>
+        <!-- change div here -->
+        <div class="flex flex-row items-center justify-center gap-4 mx-auto">
+          <Button
+            client:load
+            class="mt-4 px-8 py-7 text-base font-medium bg-black text-white hover:bg-zinc-800 rounded-md"
+          >
+            deloRean
+          </Button>
 
-        <Button
-          client:load
-          class="mt-4 px-8 py-7 text-base font-medium bg-black text-white hover:bg-zinc-800 rounded-md"
-        >
-          Attend a Meetup
-        </Button>
+          <Button
+            client:load
+            class="mt-4 px-8 py-7 text-base font-medium bg-black text-white hover:bg-zinc-800 rounded-md"
+          >
+            opentimeseries
+          </Button>
+        </div>
       </div>
     </main>
   </body>
