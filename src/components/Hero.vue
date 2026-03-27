@@ -1,22 +1,22 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref } from "vue";
 import Button from "./Button.vue";
 
-const activeLanguage = ref<'r' | 'python'>('r');
+const activeLanguage = ref<"r" | "python">("r");
 
 const terminalExamples = {
-  r: {
-    install: 'remotes::install_github("opentsi/opentimeseries")',
-    import: 'library(opentimeseries)',
-    comment: '# Read the latest version of a time series',
-    code: 'read_open_ts("ch.kof.globalbaro.leading", remote_archive = "opentsi/kofethz")',
-  },
-  python: {
-    install: 'pip install opentsi',
-    import: 'from opentsi import read_open_ts',
-    comment: '# Read the latest version of a time series',
-    code: 'read_open_ts("ch.kof.globalbaro.leading", remote_archive="opentsi/kofethz")',
-  },
+    r: {
+        install: 'remotes::install_github("opentsi/opentimeseries")',
+        import: "library(opentimeseries)",
+        comment: "Read the latest version of a time series",
+        code: 'read_open_ts("leading", remote_archive="opentsi/ch.kof.globalbaro")',
+    },
+    python: {
+        install: "pip install opentsi",
+        import: "from opentsi import read_open_ts",
+        comment: "Read the latest version of a time series",
+        code: 'read_open_ts("leading", remote_archive="opentsi/ch.kof.globalbaro")',
+    },
 };
 </script>
 
@@ -49,22 +49,22 @@ const terminalExamples = {
                         <span
                             class="bg-gradient-to-r from-foreground via-foreground to-muted-foreground bg-clip-text text-transparent"
                         >
-                            Version Control for
+                            An Open Framework
                         </span>
                         <br />
                         <span
                             class="bg-gradient-to-r from-blue-500 via-purple-500 to-indigo-500 bg-clip-text text-transparent"
                         >
-                            Time Series Data
+                            for Time Series Data
                         </span>
                     </h1>
 
                     <p
                         class="text-xl sm:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed"
                     >
-                        Track vintages, ensure reproducibility, and power your
-                        research. Data stored on GitHub, accessed directly from
-                        R or Python.
+                        Track vintages, ensure reproducibility, and manage data
+                        from public sources long-term. Data stored on GitHub,
+                        accessed directly from R or Python.
                     </p>
                 </div>
 
@@ -115,13 +115,16 @@ const terminalExamples = {
                         <div class="code-window-header">
                             <div class="flex items-center gap-2">
                                 <div class="code-window-dot bg-red-500"></div>
-                                <div class="code-window-dot bg-yellow-500"></div>
+                                <div
+                                    class="code-window-dot bg-yellow-500"
+                                ></div>
                                 <div class="code-window-dot bg-green-500"></div>
-                                <span class="text-sm text-muted-foreground ml-1 font-mono">terminal</span>
                             </div>
 
                             <!-- Language toggle -->
-                            <div class="inline-flex items-center rounded-lg border border-border/50 bg-card/30 p-0.5">
+                            <div
+                                class="inline-flex items-center rounded-lg border border-border/50 bg-card/30 p-0.5"
+                            >
                                 <button
                                     @click="activeLanguage = 'r'"
                                     :class="[
@@ -151,22 +154,50 @@ const terminalExamples = {
                         >
                             <div class="space-y-2">
                                 <div class="flex items-start gap-2">
-                                    <span class="text-green-500 select-none">$</span>
-                                    <span class="text-foreground">{{ terminalExamples[activeLanguage].install }}</span>
+                                    <span class="text-green-500 select-none"
+                                        >></span
+                                    >
+                                    <span class="text-foreground">{{
+                                        terminalExamples[activeLanguage].install
+                                    }}</span>
                                 </div>
                                 <div class="flex items-start gap-2">
-                                    <span class="text-green-500 select-none" v-if="activeLanguage === 'r'">$</span>
-                                    <span class="text-green-500 select-none" v-else>$</span>
-                                    <span class="text-foreground">{{ terminalExamples[activeLanguage].import }}</span>
+                                    <span
+                                        class="text-green-500 select-none"
+                                        v-if="activeLanguage === 'r'"
+                                        >></span
+                                    >
+                                    <span
+                                        class="text-green-500 select-none"
+                                        v-else
+                                        >$</span
+                                    >
+                                    <span class="text-foreground">{{
+                                        terminalExamples[activeLanguage].import
+                                    }}</span>
                                 </div>
                                 <div class="flex items-start gap-2 mt-4">
-                                    <span class="text-blue-500 select-none">#</span>
-                                    <span class="text-muted-foreground">{{ terminalExamples[activeLanguage].comment }}</span>
+                                    <span class="text-blue-500 select-none"
+                                        >#</span
+                                    >
+                                    <span class="text-muted-foreground">{{
+                                        terminalExamples[activeLanguage].comment
+                                    }}</span>
                                 </div>
                                 <div class="flex items-start gap-2">
-                                    <span class="text-green-500 select-none" v-if="activeLanguage === 'r'">&gt;</span>
-                                    <span class="text-green-500 select-none" v-else>&gt;&gt;&gt;</span>
-                                    <span class="text-foreground">{{ terminalExamples[activeLanguage].code }}</span>
+                                    <span
+                                        class="text-green-500 select-none"
+                                        v-if="activeLanguage === 'r'"
+                                        >&gt;</span
+                                    >
+                                    <span
+                                        class="text-green-500 select-none"
+                                        v-else
+                                        >&gt;&gt;&gt;</span
+                                    >
+                                    <span class="text-foreground">{{
+                                        terminalExamples[activeLanguage].code
+                                    }}</span>
                                 </div>
                             </div>
                         </div>
