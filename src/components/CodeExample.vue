@@ -1,18 +1,18 @@
 <script setup lang="ts">
 import { ref } from "vue";
 
-const activeTab = ref<"read" | "vintage" | "history" | "provider">("read");
-const activeLanguage = ref<"r" | "python">("r");
+const activeTabOts = ref<"read" | "vintage" | "history">("read");
+const activeTabDelo = ref<"init" | "import">("init");
 
-const examples = {
-    r: {
-        read: `# Read the latest version of a time series
+const otsExamples = {
+    read: `# Read the latest version of a time series
 library(opentimeseries)
 
 ts_data <- read_open_ts(
-  "leading", remote_archive = "opentsi/kofethz"
+  "ch.kof.globalbaro.leading",
+  remote_archive = "opentsi/kofethz"
 )`,
-        vintage: `# Read a specific vintage by date
+    vintage: `# Read a specific vintage by date
 library(opentimeseries)
 
 # Get data as it was published on a specific date
@@ -21,78 +21,43 @@ ts_historical <- read_open_ts(
   date = "2023-07-01",
   remote_archive = "opentsi/kofethz"
 )`,
-        history: `# View data revision history
+    history: `# Browse revision history
 library(opentimeseries)
 
-# Get the last 5 vintages
+# Get the last 5 vintages of a series
 history <- read_history(
   "ch.kof.globalbaro.leading",
   remote_archive = "opentsi/kofethz",
   lastn = 5
 )`,
-        provider: `# For data providers: Initialize and import
+};
+
+const deloExamples = {
+    init: `# Initialize a new archive
 library(deloRean)
 
-# Initialize a new archive
 archive_init(
   archive_name = "ch.provider.dataset",
   parent_dir = "~/opentsi/"
-)
+)`,
+    import: `# Import historical vintages
+library(deloRean)
 
-# Import historical vintages
 archive_import_history(
   vintages_dt,
   repository_path = "~/opentsi/ch.provider.dataset/"
 )`,
-    },
-    python: {
-        read: `# Read the latest version of a time series
-from opentsi import read_open_ts
-
-ts_data = read_open_ts(
-    "ch.kof.globalbaro.leading",
-    remote_archive="opentsi/kofethz"
-)`,
-        vintage: `# Read a specific vintage by date
-from opentsi import read_open_ts
-
-# Get data as it was published on a specific date
-ts_historical = read_open_ts(
-    "ch.kof.globalbaro.leading",
-    date="2023-07-01",
-    remote_archive="opentsi/kofethz"
-)`,
-        history: `# View data revision history
-from opentsi import read_history
-
-# Get the last 5 vintages
-history = read_history(
-    "ch.kof.globalbaro.leading",
-    remote_archive="opentsi/kofethz",
-    lastn=5
-)`,
-        provider: `# For data providers: Initialize and import
-from opentsi import archive_init, archive_import_history
-
-# Initialize a new archive
-archive_init(
-    archive_name="ch.provider.dataset",
-    parent_dir="~/opentsi/"
-)
-
-# Import historical vintages
-archive_import_history(
-    vintages_df,
-    repository_path="~/opentsi/ch.provider.dataset/"
-)`,
-    },
 };
 
-const tabs = [
-    { key: "read", label: "Read Data" },
+const otsTabs = [
+    { key: "read", label: "Read Latest" },
     { key: "vintage", label: "Read Vintage" },
-    { key: "history", label: "View History" },
-    { key: "provider", label: "Provider Setup" },
+    { key: "history", label: "History" },
+] as const;
+
+const deloTabs = [
+    { key: "init", label: "Initialize" },
+    { key: "import", label: "Import" },
 ] as const;
 </script>
 
@@ -105,146 +70,149 @@ const tabs = [
                     <span
                         class="bg-gradient-to-r from-foreground to-muted-foreground bg-clip-text text-transparent"
                     >
-                        Open Time Series Initiative Roadmap
+                        Open Time Series Initiative Toolbox
                     </span>
                 </h2>
                 <p class="text-xl text-muted-foreground max-w-2xl mx-auto">
-                    Libraries to leverage git for scientific time series data
-                    management.
+                    Two R packages. One for consuming data, one for managing it.
                 </p>
             </div>
 
-            <!-- Code window -->
-            <div class="max-w-5xl mx-auto">
-                <div class="code-window">
-                    <!-- Header with language switcher -->
-                    <!--
-                    <div
-                        class="flex items-center justify-between px-6 py-4 border-b border-border bg-muted/30"
-                    >
-                        <div class="text-sm font-medium text-muted-foreground">
-                            Code Examples
+            <!-- Package cards -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto overflow-hidden">
+
+                <!-- opentimeseries card -->
+                <div class="code-window flex flex-col min-w-0">
+                    <!-- Card header -->
+                    <div class="px-6 py-5 border-b border-border bg-muted/30">
+                        <div class="flex items-center justify-between mb-1">
+                            <span class="font-mono text-lg font-semibold text-primary">
+                                opentimeseries
+                            </span>
+                            <span class="text-xs px-2.5 py-1 rounded-full border border-primary/30 text-primary bg-primary/10 font-medium">
+                                for consumers
+                            </span>
                         </div>
-
-
-                        <div
-                            class="inline-flex items-center rounded-lg border border-border bg-card/50 p-1"
-                        >
-                            <button
-                                @click="activeLanguage = 'r'"
-                                :class="[
-                                    'px-4 py-1.5 text-sm font-medium rounded-md transition-all',
-                                    activeLanguage === 'r'
-                                        ? 'bg-primary text-primary-foreground shadow-sm'
-                                        : 'text-muted-foreground hover:text-foreground',
-                                ]"
-                            >
-                                R
-                            </button>
-
-                            <button
-                                @click="activeLanguage = 'python'"
-                                :class="[
-                                    'px-4 py-1.5 text-sm font-medium rounded-md transition-all',
-                                    activeLanguage === 'python'
-                                        ? 'bg-primary text-primary-foreground shadow-sm'
-                                        : 'text-muted-foreground hover:text-foreground',
-                                ]"
-                            >
-                                Python
-                            </button>
-                        </div>
+                        <p class="text-sm text-muted-foreground">
+                            Read, query, and explore time series data from any OpenTSI archive.
+                        </p>
                     </div>
-                    -->
 
                     <!-- Tabs -->
-                    <div
-                        class="flex items-center border-b border-border bg-muted/30"
-                    >
+                    <div class="flex items-center border-b border-border bg-muted/20">
                         <button
-                            v-for="tab in tabs"
+                            v-for="tab in otsTabs"
                             :key="tab.key"
-                            @click="activeTab = tab.key"
+                            @click="activeTabOts = tab.key"
                             :class="[
-                                'px-6 py-3 text-sm font-medium transition-colors relative',
-                                activeTab === tab.key
+                                'px-5 py-3 text-sm font-medium transition-colors relative',
+                                activeTabOts === tab.key
                                     ? 'text-primary'
                                     : 'text-muted-foreground hover:text-foreground',
                             ]"
                         >
                             {{ tab.label }}
                             <div
-                                v-if="activeTab === tab.key"
+                                v-if="activeTabOts === tab.key"
                                 class="absolute bottom-0 left-0 right-0 h-0.5 bg-primary"
                             ></div>
                         </button>
                     </div>
 
-                    <!-- Code content -->
-                    <div
-                        class="p-8 font-mono text-sm bg-card/50 backdrop-blur-sm overflow-x-auto"
-                    >
-                        <pre
-                            class="text-foreground leading-relaxed"
-                        ><code>{{ examples[activeLanguage][activeTab] }}</code></pre>
+                    <!-- Code -->
+                    <div class="p-6 font-mono text-sm bg-card/50 flex-1 overflow-x-auto">
+                        <pre class="text-foreground leading-relaxed"><code>{{ otsExamples[activeTabOts] }}</code></pre>
+                    </div>
+
+                    <!-- Install -->
+                    <div class="px-6 py-4 border-t border-border bg-muted/20">
+                        <span class="text-xs text-muted-foreground mr-2">install</span>
+                        <code class="text-xs font-mono text-foreground/70">remotes::install_github("opentsi/opentimeseries")</code>
                     </div>
                 </div>
 
-                <!-- Installation -->
-                <!--
-                <div
-                    class="mt-8 p-6 rounded-xl border border-border bg-card/50 backdrop-blur-sm"
-                >
-                    <div class="flex items-start gap-4">
-                        <div class="flex-shrink-0 p-2 rounded-lg bg-primary/10">
-                            <svg
-                                class="w-6 h-6 text-primary"
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24"
-                            >
-                                <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    stroke-width="2"
-                                    d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-                                />
+                <!-- deloRean card -->
+                <div class="code-window flex flex-col min-w-0">
+                    <!-- Card header -->
+                    <div class="px-6 py-5 border-b border-border bg-muted/30">
+                        <div class="flex items-center justify-between mb-1">
+                            <span class="font-mono text-lg font-semibold" style="color: oklch(0.65 0.22 310)">
+                                deloRean
+                            </span>
+                            <span class="text-xs px-2.5 py-1 rounded-full border font-medium"
+                                style="color: oklch(0.65 0.22 310); background-color: oklch(0.65 0.22 310 / 0.1); border-color: oklch(0.65 0.22 310 / 0.3)">
+                                for providers
+                            </span>
+                        </div>
+                        <p class="text-sm text-muted-foreground">
+                            Set up and manage archives with full revision history. Time travel included.
+                        </p>
+                    </div>
+
+                    <!-- Tabs -->
+                    <div class="flex items-center border-b border-border bg-muted/20">
+                        <button
+                            v-for="tab in deloTabs"
+                            :key="tab.key"
+                            @click="activeTabDelo = tab.key"
+                            :class="[
+                                'px-5 py-3 text-sm font-medium transition-colors relative',
+                                activeTabDelo === tab.key
+                                    ? 'text-foreground'
+                                    : 'text-muted-foreground hover:text-foreground',
+                            ]"
+                        >
+                            {{ tab.label }}
+                            <div
+                                v-if="activeTabDelo === tab.key"
+                                class="absolute bottom-0 left-0 right-0 h-0.5"
+                                style="background-color: oklch(0.65 0.22 310)"
+                            ></div>
+                        </button>
+                    </div>
+
+                    <!-- Code -->
+                    <div class="p-6 font-mono text-sm bg-card/50 flex-1 overflow-x-auto">
+                        <pre class="text-foreground leading-relaxed"><code>{{ deloExamples[activeTabDelo] }}</code></pre>
+                    </div>
+
+                    <!-- Install -->
+                    <div class="px-6 py-4 border-t border-border bg-muted/20">
+                        <span class="text-xs text-muted-foreground mr-2">install</span>
+                        <code class="text-xs font-mono text-foreground/70">remotes::install_github("opentsi/deloRean")</code>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Community archive teaser -->
+            <div class="max-w-6xl mx-auto mt-8">
+                <div class="rounded-xl border border-border bg-card/30 backdrop-blur-sm px-8 py-5 flex items-center justify-between gap-6">
+                    <div class="flex items-center gap-4">
+                        <div class="p-2.5 rounded-lg bg-muted/50">
+                            <svg class="w-5 h-5 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                             </svg>
                         </div>
-
-                        <div class="flex-1">
-                            <h3 class="text-lg font-semibold mb-2">
-                                Installation
-                            </h3>
-                            <div
-                                v-if="activeLanguage === 'r'"
-                                class="font-mono text-sm bg-muted/50 px-4 py-3 rounded-lg space-y-1"
-                            >
-                                <div>
-                                    remotes::install_github("opentsi/opentimeseries")
-                                </div>
-                                <div class="text-muted-foreground">
-                                    # For data providers:
-                                </div>
-                                <div>
-                                    remotes::install_github("opentsi/deloRean")
-                                </div>
-                            </div>
-                            <div
-                                v-else
-                                class="font-mono text-sm bg-muted/50 px-4 py-3 rounded-lg space-y-1"
-                            >
-                                <div>pip install opentsi</div>
-                                <div class="text-muted-foreground">
-                                    # Python package coming soon
-                                </div>
-                            </div>
+                        <div>
+                            <span class="text-sm font-medium text-foreground">Community Data Archives</span>
+                            <p class="text-xs text-muted-foreground mt-0.5">
+                                Scientific-grade public time series data, revision-tracked and ready to use.
+                            </p>
                         </div>
-
                     </div>
+                    <a
+                        href="https://github.com/opentsi"
+                        target="_blank"
+                        class="shrink-0 text-sm text-muted-foreground hover:text-foreground transition-colors flex items-center gap-1.5"
+                    >
+                        Browse archives
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </a>
                 </div>
-                -->
             </div>
+
         </div>
     </section>
 </template>
