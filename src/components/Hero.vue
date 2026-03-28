@@ -12,10 +12,10 @@ const terminalExamples = {
         code: 'read_open_ts("leading", remote_archive="opentsi/ch.kof.globalbaro")',
     },
     python: {
-        install: "pip install opentsi",
-        import: "from opentsi import read_open_ts",
-        comment: "Read the latest version of a time series",
-        code: 'read_open_ts("leading", remote_archive="opentsi/ch.kof.globalbaro")',
+        install: "coming soon...",
+        import: "coming soon...",
+        comment: "...",
+        code: "coming soon",
     },
 };
 </script>
@@ -49,21 +49,21 @@ const terminalExamples = {
                         <span
                             class="bg-gradient-to-r from-foreground via-foreground to-muted-foreground bg-clip-text text-transparent"
                         >
-                            An Open Framework
+                            An Open Framework to
                         </span>
                         <br />
                         <span
                             class="bg-gradient-to-r from-blue-500 via-purple-500 to-indigo-500 bg-clip-text text-transparent"
                         >
-                            for Time Series Data
+                            Manage Time Series Data
                         </span>
                     </h1>
 
                     <p
                         class="text-xl sm:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed"
                     >
-                        Track vintages, ensure reproducibility, and manage data
-                        from public sources long-term. Data stored on GitHub,
+                        Track vintages, automate data ingestion and leverage
+                        public sources for research. Data stored on GitHub,
                         accessed directly from R or Python.
                     </p>
                 </div>
@@ -73,7 +73,7 @@ const terminalExamples = {
                     class="flex flex-wrap items-center justify-center gap-4 pt-4"
                 >
                     <Button variant="default" size="lg" href="#get-started">
-                        Get Started
+                        Learn more
                         <svg
                             class="w-5 h-5"
                             fill="none"
