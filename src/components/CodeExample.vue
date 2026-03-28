@@ -105,11 +105,12 @@ const tabs = [
                     <span
                         class="bg-gradient-to-r from-foreground to-muted-foreground bg-clip-text text-transparent"
                     >
-                        Get Started in Seconds
+                        Open Time Series Initiative Roadmap
                     </span>
                 </h2>
                 <p class="text-xl text-muted-foreground max-w-2xl mx-auto">
-                    Simple, intuitive API for R and Python
+                    Libraries to leverage git for scientific time series data
+                    management.
                 </p>
             </div>
 
@@ -117,6 +118,7 @@ const tabs = [
             <div class="max-w-5xl mx-auto">
                 <div class="code-window">
                     <!-- Header with language switcher -->
+                    <!--
                     <div
                         class="flex items-center justify-between px-6 py-4 border-b border-border bg-muted/30"
                     >
@@ -124,7 +126,7 @@ const tabs = [
                             Code Examples
                         </div>
 
-                        <!-- Language toggle -->
+
                         <div
                             class="inline-flex items-center rounded-lg border border-border bg-card/50 p-1"
                         >
@@ -139,6 +141,7 @@ const tabs = [
                             >
                                 R
                             </button>
+
                             <button
                                 @click="activeLanguage = 'python'"
                                 :class="[
@@ -152,6 +155,7 @@ const tabs = [
                             </button>
                         </div>
                     </div>
+                    -->
 
                     <!-- Tabs -->
                     <div
@@ -187,6 +191,7 @@ const tabs = [
                 </div>
 
                 <!-- Installation -->
+                <!--
                 <div
                     class="mt-8 p-6 rounded-xl border border-border bg-card/50 backdrop-blur-sm"
                 >
@@ -206,6 +211,7 @@ const tabs = [
                                 />
                             </svg>
                         </div>
+
                         <div class="flex-1">
                             <h3 class="text-lg font-semibold mb-2">
                                 Installation
@@ -234,8 +240,10 @@ const tabs = [
                                 </div>
                             </div>
                         </div>
+
                     </div>
                 </div>
+                -->
             </div>
         </div>
     </section>

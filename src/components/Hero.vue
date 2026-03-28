@@ -64,7 +64,7 @@ const terminalExamples = {
                     >
                         Track vintages, automate data ingestion and leverage
                         public sources for research. Data stored on GitHub,
-                        accessed directly from R or Python.
+                        accessed directly from R.
                     </p>
                 </div>
 
