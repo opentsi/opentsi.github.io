@@ -21,7 +21,7 @@ jobs:
     steps:
       - name: Checkout
         run: |
-          apk add --no-cache git
+          apk add --no-cache git tar
           git clone --depth 1 https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git .
 
       - name: Install dependencies
