@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Hero from '../components/Hero.vue';
+import ArchiveTeaser from '../components/ArchiveTeaser.vue';
 import Features from '../components/Features.vue';
 import CodeExample from '../components/CodeExample.vue';
 import Footer from '../components/Footer.vue';
@@ -9,6 +10,7 @@ import Footer from '../components/Footer.vue';
 <Layout title="OpenTSI - Version Control for Time Series Data">
   <main>
     <Hero client:load />
+    <ArchiveTeaser client:visible />
     <Features client:visible />
     <CodeExample client:load />
     <Footer />

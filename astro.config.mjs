@@ -18,21 +18,25 @@ export default defineConfig({
       sidebar: [
         {
           label: "Open Time Series Initiative",
-          items: [
-            { label: "Introduction", slug: "intro" },
-            { label: "H4Sci blog (applications)", slug: "intro" },
-          ],
-        },
-        {
-          label: "Data",
           items: [{ label: "Introduction", slug: "intro" }],
         },
         {
-          label: "Software",
+          label: "Data",
           items: [
-            { label: "R", slug: "intro" },
-            { label: "Python", slug: "intro" },
+            { label: "Listed Data Packages", slug: "listed_data" },
+            { label: "Community Hosted Data", slug: "community_hosted" },
+            { label: "Free Hosting", slug: "free_hosting" },
+            { label: "Track Data Revisions", slug: "track_data" },
+            { label: "Web Previews", slug: "web_preview" },
           ],
+        },
+        {
+          label: "Software",
+          items: [{ label: "R Integration", slug: "r_integration" }],
+        },
+        {
+          label: "Hosting Your Own",
+          items: [{ label: "Run Your Own Archives", slug: "own_archives" }],
         },
       ],
     }),
