@@ -18,7 +18,10 @@ export default defineConfig({
       sidebar: [
         {
           label: "Open Time Series Initiative",
-          items: [{ label: "Introduction", slug: "intro" }],
+          items: [
+            { label: "How to Read This Documentation?", slug: "intro" },
+            { label: "About", slug: "about" },
+          ],
         },
         {
           label: "Data",

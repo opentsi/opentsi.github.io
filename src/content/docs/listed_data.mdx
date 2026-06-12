@@ -3,7 +3,12 @@ title: Listed Data Packages
 description: Community time series archives hosted on GitHub by the opentsi organization.
 ---
 
+import { Aside } from '@astrojs/starlight/components';
 import ArchiveList from '../../components/ArchiveList.vue'
+
+<Aside type="note" title="Definition of an opentimeseries dataset">
+A dataset is a bundle of time series and their metainformation. All series must come from the same data provider, have the same publication date (update date) and cover the same topic.
+</Aside>
 
 The archives below are public GitHub repositories maintained by the opentsi community.
 Each one follows the standard archive structure and is accessible directly from R or Python.

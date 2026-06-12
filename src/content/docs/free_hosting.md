@@ -3,11 +3,10 @@ title: Free Hosting
 description: Leverage GitHub for free data hosting and version control with no infrastructure costs.
 ---
 
-# Free Hosting
+We have seen promising academic projects die because a key person left an institution or funding phased out. 
+Often, even though the financial commitment was rather little, it was challenging to find good solutions to continue hosting a project particularly on university infrastructure. 
 
-opentsi archives are plain Git repositories hosted on GitHub. There is no dedicated server to run, no database to maintain, and no hosting bill to pay.
-
-## How it works
+## How We 
 
 Each archive is a GitHub repository with a defined folder structure. Data files are stored as flat files (JSON or CSV) and versioned with Git. GitHub's free tier is sufficient for most community archives.
 
@@ -18,6 +17,5 @@ Each archive is a GitHub repository with a defined folder structure. Data files 
 - **High availability** — GitHub's CDN serves data globally
 - **Familiar tooling** — use standard git workflows for data updates and pull requests
 
-## Getting started
 
-Follow the [archive setup guide](/own_archives/) to create your own hosted archive in minutes.
+## On the Road Map: Support for other Git Providers
