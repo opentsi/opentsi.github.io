@@ -27,6 +27,14 @@ onMounted(fetchArchives);
                 rel="noopener"
                 class="underline hover:text-foreground transition-colors"
                 >github.com/opentsi</a
+            >
+            , archive status on
+            <a
+                href="https://opentsi.github.io/status"
+                target="_blank"
+                rel="noopener"
+                class="underline hover:text-foreground transition-colors"
+                >opentsi.github.io/status</a
             >.
         </p>
 

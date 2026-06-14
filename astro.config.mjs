@@ -30,12 +30,14 @@ export default defineConfig({
             { label: "Community Hosted Data", slug: "community_hosted" },
             { label: "Free Hosting", slug: "free_hosting" },
             { label: "Track Data Revisions", slug: "track_data" },
-            { label: "Web Previews", slug: "web_preview" },
+            { label: "Dataset Status Dashboard", slug: "status" },
           ],
         },
         {
           label: "Software",
-          items: [{ label: "R Integration", slug: "r_integration" }],
+          items: [
+            { label: "opentimeseries R package", slug: "opentimeseries_r" },
+          ],
         },
         {
           label: "Hosting Your Own",
