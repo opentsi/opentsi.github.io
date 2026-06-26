@@ -39,11 +39,11 @@ onMounted(fetchArchives);
         </p>
 
         <!-- Loading -->
-        <div v-if="loading" class="space-y-6">
+        <div v-if="loading" class="space-y-3">
             <div
                 v-for="n in 6"
                 :key="n"
-                class="h-16 rounded-lg border border-border bg-card/50 animate-pulse"
+                class="h-10 rounded-lg border border-border bg-card/50 animate-pulse"
             ></div>
         </div>
 
@@ -60,42 +60,39 @@ onMounted(fetchArchives);
             No archives found.
         </p>
 
-        <!-- List -->
-        <div v-else>
-            <a
-                v-for="archive in archives"
-                :key="archive.name"
-                :href="archive.html_url"
-                target="_blank"
-                rel="noopener"
-                class="group block pt-10 pb-1 no-underline hover:bg-muted/20 -mx-2 px-2 rounded transition-colors"
-            >
-                <p class="text-xs text-muted-foreground leading-none mb-1">
-                    Updated {{ formatDate(archive.pushed_at) }}
-                </p>
-                <h3
-                    class="not-content text-base font-semibold font-mono text-foreground leading-snug mb-1"
-                    style="margin-top: 0"
-                >
-                    {{ archive.name }}
-                </h3>
-                <svg
-                    width="14"
-                    height="14"
-                    class="text-muted-foreground group-hover:text-foreground transition-colors"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                >
-                    <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                    />
-                </svg>
-                <br />
-            </a>
+        <!-- Table -->
+        <div v-else class="overflow-x-auto">
+            <table class="w-full text-sm border-collapse">
+                <thead>
+                    <tr class="border-b border-border text-left">
+                        <th class="py-2 pr-6 font-semibold text-foreground">Archive</th>
+                        <th class="py-2 pr-6 font-semibold text-foreground">First Vintage</th>
+                        <th class="py-2 font-semibold text-foreground">Last Updated</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr
+                        v-for="archive in archives"
+                        :key="archive.name"
+                        class="border-b border-border/50 hover:bg-muted/20 transition-colors"
+                    >
+                        <td class="py-2 pr-6">
+                            <a
+                                :href="archive.html_url"
+                                target="_blank"
+                                rel="noopener"
+                                class="font-mono font-semibold text-foreground no-underline hover:underline"
+                            >{{ archive.name }}</a>
+                        </td>
+                        <td class="py-2 pr-6 text-muted-foreground">
+                            {{ archive.first_commit_at ? formatDate(archive.first_commit_at) : '—' }}
+                        </td>
+                        <td class="py-2 text-muted-foreground">
+                            {{ formatDate(archive.pushed_at) }}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </template>
