@@ -8,6 +8,16 @@ export default defineConfig({
   integrations: [
     starlight({
       title: "opentsi docs",
+      head: [
+        {
+          tag: "script",
+          attrs: {
+            defer: true,
+            src: "https://analytics.alpine-jellyfish.ch/script.js",
+            "data-website-id": "b655e06f-99dd-458e-bbb6-31965a039910",
+          },
+        },
+      ],
       social: [
         {
           icon: "github",
